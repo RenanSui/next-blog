@@ -1,12 +1,5 @@
+import { Post } from '@/types'
 import { unstable_cache as cache } from 'next/cache'
-
-type Post = {
-  _id: string
-  title: string
-  body: string
-  createdAt: Date
-  updateAt: Date
-}
 
 export async function getPosts() {
   return await cache(
