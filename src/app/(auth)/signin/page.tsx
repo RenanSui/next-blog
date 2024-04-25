@@ -25,7 +25,7 @@ export default async function Page() {
             Photo by{' '}
             <a
               className="hover:underline"
-              href="<%= unsplash.auth.authorUrl %>"
+              href={siteConfig.unsplash.auth.authorUrl}
               target="_blank"
             >
               {siteConfig.unsplash.auth.author}{' '}
@@ -33,7 +33,7 @@ export default async function Page() {
             on{' '}
             <a
               className="hover:underline"
-              href="<%= unsplash.auth.imagePageUrl %>"
+              href={siteConfig.unsplash.auth.imagePageUrl}
               target="_blank"
             >
               Unsplash
@@ -86,7 +86,6 @@ export default async function Page() {
                   name="email"
                   id="email"
                   placeholder="reallycoolguy@gmail.com"
-                  value="<%= locals.email %>"
                 />
                 {/* <% if (locals.emailError) { %>
                 <p className="text-[0.8rem] font-medium text-red-600">

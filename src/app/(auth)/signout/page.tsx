@@ -25,7 +25,7 @@ export default async function Page() {
             Photo by{' '}
             <a
               className="hover:underline"
-              href="<%= unsplash.auth.authorUrl %>"
+              href={siteConfig.unsplash.auth.authorUrl}
               target="_blank"
             >
               {siteConfig.unsplash.auth.author}{' '}
@@ -33,7 +33,7 @@ export default async function Page() {
             on{' '}
             <a
               className="hover:underline"
-              href="<%= unsplash.auth.imagePageUrl %>"
+              href={siteConfig.unsplash.auth.imagePageUrl}
               target="_blank"
             >
               Unsplash
