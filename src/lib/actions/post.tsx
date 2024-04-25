@@ -11,7 +11,7 @@ type Post = {
 export async function getPosts() {
   return await cache(
     async () => {
-      const response = await fetch('http://localhost:8000/blog/post')
+      const response = await fetch(`${process.env.SERVER_URL}/blog/post`)
       const data = (await response.json()) as { data: Post[] }
       return data.data
     },
@@ -20,14 +20,14 @@ export async function getPosts() {
   )()
 }
 
-export async function getPostById(postId: string) {
-  const response = await fetch(`http://localhost:8000/blog/post/id/${postId}`)
+export async function getPostById(id: string) {
+  const response = await fetch(`${process.env.SERVER_URL}/blog/post/id/${id}`)
   const data = (await response.json()) as { data: Post }
   return data.data
 }
 
 export async function getPostBySearch(searchInput: string) {
-  const response = await fetch(`http://localhost:8000/blog/post/search`, {
+  const response = await fetch(`${process.env.SERVER_URL}/blog/post/search`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
