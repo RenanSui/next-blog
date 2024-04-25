@@ -1,9 +1,4 @@
 export function Search() {
-  // const action = (form) => {
-  //   'use server'
-  //   console.log(form)
-  // }
-
   return (
     <div>
       <form
@@ -11,12 +6,6 @@ export function Search() {
         role="search"
         className="flex gap-1 items-center justify-center"
       >
-        {/* <form
-        action={action}
-        role="search"
-        method="POST"
-        className="flex gap-1 items-center justify-center"
-      > */}
         <div className="flex gap-1 items-center justify-center">
           <input
             type="text"
