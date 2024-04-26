@@ -1,6 +1,7 @@
 import { siteConfig } from '@/config/site'
+import SignInForm from '../_components/signin-form'
 
-export default async function Page() {
+export default function Page() {
   return (
     <div className="mx-auto flex gap-8 relative">
       <div className="absolute bottom-0 left-0 right-0 top-0 w-screen md:relative">
@@ -43,7 +44,7 @@ export default async function Page() {
       </div>
 
       <div className="relative z-10 flex h-screen w-screen items-center justify-center p-8">
-        <div className="w-full max-w-[480px] rounded-xl border p-6 shadow">
+        <div className="w-full max-w-[480px] rounded-xl border p-6 shadow bg-white">
           <div className="flex flex-col space-y-1 pb-6">
             <h1 className="text-2xl font-semibold tracking-tight text-black">
               Sign in
@@ -67,56 +68,7 @@ export default async function Page() {
               </div>
             </div>
 
-            <form
-              action="/auth/sign-in"
-              role="sign-in"
-              method="POST"
-              className="grid gap-4"
-            >
-              <div className="space-y-2">
-                <label
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  htmlFor="email"
-                >
-                  Email
-                </label>
-                <input
-                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                  type="text"
-                  name="email"
-                  id="email"
-                  placeholder="reallycoolguy@gmail.com"
-                />
-                {/* <% if (locals.emailError) { %>
-                <p className="text-[0.8rem] font-medium text-red-600">
-                  <%= locals.emailError %>
-                </p>
-                <% } %> */}
-              </div>
-              <div className="space-y-2">
-                <label
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <input
-                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="********"
-                />
-                {/* <% if (locals.emailError) { %>
-                <p className="text-[0.8rem] font-medium text-red-600">
-                  <%= locals.passwordError %>
-                </p>
-                <% } %> */}
-              </div>
-              <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border text-white hover:bg-neutral-800 shadow-sm bg-neutral-950 w-full py-2">
-                Sign In
-              </button>
-            </form>
+            <SignInForm />
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-2 py-2">
