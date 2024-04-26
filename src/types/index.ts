@@ -1,3 +1,6 @@
+import { ReasonPhrases, StatusCodes } from 'http-status-codes'
+type StrToNum<Str> = Str extends `${infer Num extends number}` ? Num : Str
+
 export type Post = {
   _id: string
   title: string
@@ -5,3 +8,5 @@ export type Post = {
   createdAt: Date
   updateAt: Date
 }
+
+export type StatusCode = StrToNum<`${StatusCodes}`>
