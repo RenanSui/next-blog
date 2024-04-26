@@ -12,3 +12,9 @@ export type Post = {
 export type StatusCode = StrToNum<`${StatusCodes}`>
 
 export type ReasonPhrase = `${ReasonPhrases}`
+
+export type AuthResponse = {
+  data?: { accessToken: string }
+  message: ReasonPhrase
+  status: StatusCode
+}
