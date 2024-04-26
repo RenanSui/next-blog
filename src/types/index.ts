@@ -10,3 +10,5 @@ export type Post = {
 }
 
 export type StatusCode = StrToNum<`${StatusCodes}`>
+
+export type ReasonPhrase = `${ReasonPhrases}`
