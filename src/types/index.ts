@@ -13,15 +13,10 @@ export type StatusCode = StrToNum<`${StatusCodes}`>
 
 export type ReasonPhrase = `${ReasonPhrases}`
 
-export type HTTPResponse = {
+export type HTTPResponse<T> = {
+  data: T | null
   message: ReasonPhrase
   status: StatusCode
 }
 
-export type AuthResponse = HTTPResponse & {
-  data?: { accessToken: string }
-}
-
-export type PostResponse = HTTPResponse & {
-  data: Post
-}
+export type Auth = { accessToken: string }
