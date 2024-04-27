@@ -21,7 +21,7 @@ export const signIn = async (formData: Inputs) => {
   const cookieStore = cookies()
 
   const accessToken = cookieStore.get('accessToken')?.value ?? ''
-  const response = await fetch('http://localhost:8000/auth/sign-in', {
+  const response = await fetch(`${process.env.SERVER_URL}/auth/sign-in`, {
     method: 'POST',
     credentials: 'include',
     headers: {
