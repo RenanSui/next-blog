@@ -1,6 +1,6 @@
 'use server'
 
-import { AuthResponse } from '@/types'
+import { Auth, HTTPResponse } from '@/types'
 import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { authSchema } from '../validations/auth'
@@ -31,7 +31,7 @@ export const signIn = async (formData: Inputs) => {
     body: JSON.stringify({ ...parsed.data }),
   })
 
-  const { data, message, status }: AuthResponse = await response.json()
+  const { data, message, status }: HTTPResponse<Auth> = await response.json()
 
   if (data?.accessToken) {
     cookieStore.set('accessToken', data.accessToken, {
