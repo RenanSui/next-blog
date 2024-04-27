@@ -8,10 +8,10 @@ export default async function Page({
   params: { id: string }
   searchParams: { index: string }
 }) {
-  const post = await getPostById(id)
+  const { error, post } = await getPostById(id)
 
-  return (
-    <div className="max-w-screen-lg mx-auto px-4">
+  return post ? (
+    <div className="max-w-screen-lg mx-auto">
       <section className="space-y-8 py-16">
         <header>
           <h1 className="text-3xl font-medium capitalize">{post.title}</h1>
@@ -28,6 +28,24 @@ export default async function Page({
               {post.body}
             </p>
           </div>
+        </main>
+        <footer>
+          <Link href={`/#post-${index}`} className="hover:underline">
+            Go back
+          </Link>
+        </footer>
+      </section>
+    </div>
+  ) : (
+    <div className="max-w-screen-lg mx-auto">
+      <section className="space-y-8 py-16">
+        <header>
+          <h1 className="text-3xl font-medium capitalize">
+            An error has ocurred.
+          </h1>
+        </header>
+        <main>
+          <p className="text-lg tracking-wide font-light">{error.message}...</p>
         </main>
         <footer>
           <Link href={`/#post-${index}`} className="hover:underline">

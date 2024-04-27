@@ -1,4 +1,4 @@
-import { Post } from '@/types'
+import { Post, PostResponse } from '@/types'
 import { unstable_cache as cache } from 'next/cache'
 
 export async function getPosts() {
@@ -14,9 +14,19 @@ export async function getPosts() {
 }
 
 export async function getPostById(id: string) {
-  const response = await fetch(`${process.env.SERVER_URL}/blog/post/id/${id}`)
-  const data = (await response.json()) as { data: Post }
-  return data.data
+  try {
+    const response = await fetch(`${process.env.SERVER_URL}/blog/post/id/${id}`)
+    const { data, status }: PostResponse = await response.json()
+
+    if (status && status !== 200) {
+      throw new Error('No post were found')
+    }
+
+    return { post: data, error: null }
+  } catch (err) {
+    const error = err as Error
+    return { post: null, error }
+  }
 }
 
 export async function getPostBySearch(searchInput: string) {
