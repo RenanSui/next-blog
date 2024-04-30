@@ -1,10 +1,8 @@
+import { fontHeading, fontMono, fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import { Toaster } from 'sonner'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,8 +18,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          'bg-[url(/images/img-noise-361x370.png)] bg-white min-h-screen bg-background font-sans antialiased',
-          inter.className,
+          'min-h-screen bg-white dark:bg-neutral-950 font-sans antialiased',
+          fontSans.variable,
+          fontMono.variable,
+          fontHeading.variable,
         )}
       >
         <Toaster />
