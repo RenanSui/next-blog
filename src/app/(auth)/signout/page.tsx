@@ -1,6 +1,7 @@
 import { siteConfig } from '@/config/site'
 import Image from 'next/image'
 import Link from 'next/link'
+import { SignoutButton } from '../_components/signout-button'
 
 export default async function Page() {
   return (
@@ -43,7 +44,7 @@ export default async function Page() {
       </div>
 
       <div className="relative z-10 flex h-screen w-screen items-center justify-center p-8">
-        <div className="w-full max-w-xs rounded-xl bg-transparent p-6 shadow xl:mx-8">
+        <div className="w-full max-w-xs rounded-xl bg-transparent p-6 shadow xl:mx-8 bg-white">
           <div className="flex flex-col items-center space-y-1 pb-6">
             <h1 className="text-2xl font-semibold tracking-tight text-black ">
               Sign out
@@ -54,7 +55,7 @@ export default async function Page() {
           </div>
 
           <div className="flex justify-center space-x-2">
-            {/* <Signout className="w-full">Log out</Signout> */}
+            <SignoutButton className="w-full">Log out</SignoutButton>
             <Link
               className="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-8 rounded-md px-3 text-xs border text-black bg-transparent hover:bg-neutral-100 shadow-sm w-full"
               href="/"
