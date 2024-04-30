@@ -1,10 +1,15 @@
+import { User } from '@/types'
 import Link from 'next/link'
 import { PostsCombobox } from '../posts-combobox'
+import { AuthDropdown } from './auth-dropdown'
 
-export const SiteHeader = () => {
+interface SiteHeaderProps {
+  user: User | null
+}
+
+export const SiteHeader = ({ user }: SiteHeaderProps) => {
   return (
-    <header className="sticky top-0 z-50 flex border-b bg-white bg-[url(/images/img-noise-361x370.png)]">
-      {/* <div className="mx-auto w-full max-w-screen-lg flex items-center justify-between container"> */}
+    <header className="sticky top-0 z-50 flex border-b bg-white dark:bg-neutral-950">
       <div className="container flex h-16 items-center">
         <Link href="/" className="text-3xl font-medium">
           Blog
@@ -13,7 +18,7 @@ export const SiteHeader = () => {
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
             <PostsCombobox />
-            <div className="h-8 w-8 rounded-full bg-neutral-400" />
+            <AuthDropdown user={user} />
           </nav>
         </div>
       </div>
