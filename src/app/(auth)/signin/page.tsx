@@ -1,14 +1,14 @@
 import { siteConfig } from '@/config/site'
+import Image from 'next/image'
 import SignInForm from '../_components/signin-form'
 
 export default function Page() {
   return (
     <div className="mx-auto flex gap-8 relative">
       <div className="absolute bottom-0 left-0 right-0 top-0 w-screen md:relative">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           className="absolute inset-0 h-full w-full object-cover text-transparent opacity-50"
-          src={siteConfig.unsplash.auth.imageUrl}
+          src={siteConfig.unsplash.auth.signin.imageUrl}
           width="1280"
           height="1080"
           alt="photo of city buildings during
@@ -26,15 +26,15 @@ export default function Page() {
             Photo by{' '}
             <a
               className="hover:underline"
-              href={siteConfig.unsplash.auth.authorUrl}
+              href={siteConfig.unsplash.auth.signin.authorUrl}
               target="_blank"
             >
-              {siteConfig.unsplash.auth.author}{' '}
+              {siteConfig.unsplash.auth.signin.author}{' '}
             </a>
             on{' '}
             <a
               className="hover:underline"
-              href={siteConfig.unsplash.auth.imagePageUrl}
+              href={siteConfig.unsplash.auth.signin.imagePageUrl}
               target="_blank"
             >
               Unsplash
@@ -78,7 +78,7 @@ export default function Page() {
               </span>
               <a
                 aria-label="Sign up"
-                href="/auth/sign-up"
+                href="/signup"
                 className="text-primary underline-offset-4 transition-colors hover:underline"
               >
                 Sign up
