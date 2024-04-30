@@ -12,6 +12,12 @@ export type Post = {
   updateAt: Date
 }
 
+export type User = {
+  email: string
+  password: string
+  isAdmin: boolean
+}
+
 export type StatusCode = keyof typeof HTPPErrorMessages
 
 export type ReasonPhrase = `${ReasonPhrases}`
