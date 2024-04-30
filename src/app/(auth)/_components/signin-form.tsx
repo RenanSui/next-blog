@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { signIn } from '@/lib/actions/auth'
+import { auth } from '@/lib/actions/auth'
 import { authSchema } from '@/lib/validations/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
@@ -39,7 +39,7 @@ export default function SignInForm() {
   async function onSubmit(data: Inputs) {
     setLoading(true)
     try {
-      const { error, status } = await signIn({ ...data })
+      const { error, status } = await auth.signIn({ ...data })
 
       if (error && error?.message) {
         throw new Error(error?.message)
