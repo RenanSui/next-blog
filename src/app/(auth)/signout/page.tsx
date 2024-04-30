@@ -2,8 +2,13 @@ import { siteConfig } from '@/config/site'
 import Image from 'next/image'
 import Link from 'next/link'
 import { SignoutButton } from '../_components/signout-button'
+import { getUser } from '@/lib/actions/user'
+import { redirect } from 'next/navigation'
 
 export default async function Page() {
+  const user = await getUser()
+  if (!user) redirect('/signin')
+
   return (
     <div className="mx-auto flex  gap-8 relative">
       <div className="absolute bottom-0 left-0 right-0 top-0 w-screen md:relative">
