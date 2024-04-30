@@ -1,6 +1,6 @@
 'use server'
 
-import { Auth, HTTPResponse } from '@/types'
+import { Auth, HTTPResponse, StatusCode } from '@/types'
 import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { authSchema } from '../validations/auth'
@@ -79,4 +79,15 @@ export const signUp = async (formData: Inputs) => {
   }
 
   return { message, status }
+}
+
+export const signOut = async () => {
+  const cookieStore = cookies()
+  cookieStore.delete('accessToken')
+  const accessToken = cookieStore.get('accessToken')?.value
+
+  if (accessToken) {
+    return { status: 400 } as { status: StatusCode }
+  }
+  return { status: 200 } as { status: StatusCode }
 }
