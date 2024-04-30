@@ -1,17 +1,17 @@
 import { siteConfig } from '@/config/site'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default async function Page() {
   return (
     <div className="mx-auto flex  gap-8 relative">
       <div className="absolute bottom-0 left-0 right-0 top-0 w-screen md:relative">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           className="absolute inset-0 h-full w-full object-cover text-transparent opacity-50"
-          src={siteConfig.unsplash.auth.imageUrl}
+          src={siteConfig.unsplash.auth.signup.imageUrl}
           width="1280"
           height="1080"
-          alt="photo of city buildings during
-      daytime"
+          alt="photo of city buildings during daytime"
         />
 
         <div className="relative z-10 flex h-full flex-col justify-between p-4 px-8">
@@ -25,15 +25,15 @@ export default async function Page() {
             Photo by{' '}
             <a
               className="hover:underline"
-              href={siteConfig.unsplash.auth.authorUrl}
+              href={siteConfig.unsplash.auth.signup.authorUrl}
               target="_blank"
             >
-              {siteConfig.unsplash.auth.author}{' '}
+              {siteConfig.unsplash.auth.signup.author}{' '}
             </a>
             on{' '}
             <a
               className="hover:underline"
-              href={siteConfig.unsplash.auth.imagePageUrl}
+              href={siteConfig.unsplash.auth.signup.imagePageUrl}
               target="_blank"
             >
               Unsplash
@@ -55,12 +55,12 @@ export default async function Page() {
 
           <div className="flex justify-center space-x-2">
             {/* <Signout className="w-full">Log out</Signout> */}
-            <a
+            <Link
               className="inline-flex items-center justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-8 rounded-md px-3 text-xs border text-black bg-transparent hover:bg-neutral-100 shadow-sm w-full"
               href="/"
             >
               Go back
-            </a>
+            </Link>
           </div>
         </div>
       </div>

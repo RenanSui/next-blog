@@ -1,6 +1,7 @@
 import { siteConfig } from '@/config/site'
 import Image from 'next/image'
 import SignInForm from '../_components/signin-form'
+import Link from 'next/link'
 
 export default function Page() {
   return (
@@ -76,13 +77,13 @@ export default function Page() {
               <span className="mr-1 hidden sm:inline-block">
                 Don&apos;t have an account?
               </span>
-              <a
+              <Link
                 aria-label="Sign up"
                 href="/signup"
                 className="text-primary underline-offset-4 transition-colors hover:underline"
               >
                 Sign up
-              </a>
+              </Link>
             </div>
           </div>
         </div>
