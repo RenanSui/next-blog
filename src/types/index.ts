@@ -1,5 +1,8 @@
-import { ReasonPhrases, StatusCodes } from 'http-status-codes'
-type StrToNum<Str> = Str extends `${infer Num extends number}` ? Num : Str
+import { HTPPErrorMessages } from '@/lib/handle-auth-error'
+import { ReasonPhrases } from 'http-status-codes'
+
+// type StrToNum<Str> = Str extends `${infer Num extends number}` ? Num : Str
+// export type StatusCode = StrToNum<`${StatusCodes}`>
 
 export type Post = {
   _id: string
@@ -9,7 +12,7 @@ export type Post = {
   updateAt: Date
 }
 
-export type StatusCode = StrToNum<`${StatusCodes}`>
+export type StatusCode = keyof typeof HTPPErrorMessages
 
 export type ReasonPhrase = `${ReasonPhrases}`
 
