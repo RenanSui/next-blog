@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           'bg-[url(/images/img-noise-361x370.png)] bg-white min-h-screen bg-background font-sans antialiased',
