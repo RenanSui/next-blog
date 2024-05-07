@@ -9,8 +9,8 @@ const navbar = {
       href: '/',
     },
     {
-      title: 'Admin',
-      href: '/admin',
+      title: 'Dashboard',
+      href: '/dashboard',
     },
   ],
 }
@@ -44,6 +44,7 @@ const oauthProviders = [
 ]
 
 export const siteConfig = {
+  name: 'Blog',
   title: 'Sui Blog',
   description: 'Simple blog created with NodeJS, Express & Mongodb',
   links,
