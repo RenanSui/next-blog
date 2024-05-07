@@ -1,49 +1,56 @@
 'use client'
 
-import { Icons } from '@/components/icons'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
+import { useMounted } from '@/hooks/use-mounted'
 import { signOut } from '@/lib/actions/auth'
 import { AuthErrorHandler } from '@/lib/handle-auth-error'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
-import { ButtonHTMLAttributes, useState } from 'react'
 import { toast } from 'sonner'
 
-export const SignoutButton = ({
-  children,
-  className,
-  ...props
-}: ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const [isLoading, setIsLoading] = useState(false)
+export function SignoutButton() {
   const router = useRouter()
+  const mounted = useMounted()
 
   return (
-    <Button
-      disabled={isLoading}
-      className={cn(
-        'bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 dark:bg-neutral-900 dark:text-neutral-50 dark:hover:bg-neutral-900/90',
-        className,
+    <div className="flex w-full flex-col-reverse items-center gap-2 sm:flex-row">
+      <Button
+        variant="secondary"
+        size="sm"
+        className="w-full"
+        onClick={() => router.back()}
+      >
+        Go back
+        <span className="sr-only">Previous page</span>
+      </Button>
+      {mounted ? (
+        <Button
+          size="sm"
+          className="w-full"
+          onClick={async () => {
+            try {
+              const { status } = await signOut()
+              AuthErrorHandler(status)
+              router.push('/')
+            } catch (error) {
+              toast.error(error as string)
+            }
+          }}
+        >
+          Log out
+          <span className="sr-only">Log out</span>
+        </Button>
+      ) : (
+        <Skeleton
+          className={cn(
+            buttonVariants({ size: 'sm' }),
+            'w-full bg-muted text-muted-foreground',
+          )}
+        >
+          Log out
+        </Skeleton>
       )}
-      variant="default"
-      size="sm"
-      onClick={async () => {
-        setIsLoading(true)
-        try {
-          const { status } = await signOut()
-          AuthErrorHandler(status)
-          router.push(`${window.location.origin}/`)
-        } catch (error) {
-          toast.error(error as string)
-        } finally {
-          setIsLoading(false)
-        }
-      }}
-      {...props}
-    >
-      {isLoading && (
-        <Icons.spinner className="mr-2 h-4 w-4 animate-spin text-white" />
-      )}
-      {children}
-    </Button>
+    </div>
   )
 }
