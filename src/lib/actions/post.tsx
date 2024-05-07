@@ -1,6 +1,10 @@
 'use server'
 
 import { HTTPResponse, Post } from '@/types'
+import { cookies } from 'next/headers'
+import { z } from 'zod'
+import { createPostSchema } from '../validations/post'
+import { revalidatePath } from 'next/cache'
 
 export async function getPosts() {
   try {
@@ -53,5 +57,36 @@ export async function getPostBySearch(searchInput: string) {
   } catch (err) {
     const error = err as Error
     return { posts: null, error }
+  }
+}
+
+type CreatePostFormData = z.infer<typeof createPostSchema>
+
+export async function createPost(formData: CreatePostFormData) {
+  try {
+    const cookieStore = cookies()
+    const accessToken = cookieStore.get('accessToken')?.value ?? ''
+
+    const response = await fetch(`${process.env.SERVER_URL}/blog/post/create`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ ...formData }),
+    })
+
+    const { status, message }: HTTPResponse = await response.json()
+
+    console.log({ status, message })
+
+    if (status && status !== 200) {
+      throw new Error('An error has occurred')
+    }
+
+    revalidatePath('/')
+  } catch (error) {
+    console.log({ error })
   }
 }
