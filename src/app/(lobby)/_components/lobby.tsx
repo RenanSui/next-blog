@@ -1,3 +1,4 @@
+import { Shell } from '@/components/shell'
 import { getPosts } from '@/lib/actions/post'
 import Link from 'next/link'
 
@@ -9,7 +10,7 @@ export async function Lobby({ postsPromise }: LobbyProps) {
   const { posts, error } = await postsPromise
 
   return (
-    <div className="max-w-screen-lg mx-auto flex flex-col gap-8 ">
+    <Shell>
       <section id="about" className="flex flex-col gap-4 py-4">
         <h2 className="font-bold text-5xl text-center">
           Hey, welcome! The name&apos;s Sui.
@@ -100,6 +101,6 @@ export async function Lobby({ postsPromise }: LobbyProps) {
           <% } %> */}
         </footer>
       </section>
-    </div>
+    </Shell>
   )
 }
