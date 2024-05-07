@@ -1,6 +1,13 @@
-import { siteConfig } from '@/config/site'
+import { Shell } from '@/components/shell'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import { getUser } from '@/lib/actions/user'
-import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import SignUpForm from '../_components/signup-form'
@@ -10,89 +17,41 @@ export default async function Page() {
   if (user) redirect('/signout')
 
   return (
-    <div className="mx-auto flex gap-8 relative">
-      <div className="absolute bottom-0 left-0 right-0 top-0 w-screen md:relative">
-        <Image
-          className="absolute inset-0 h-full w-full object-cover text-transparent opacity-50"
-          src={siteConfig.unsplash.auth.signup.imageUrl}
-          width="1280"
-          height="1080"
-          alt="photo of city buildings during
-      daytime"
-        />
-
-        <div className="relative z-10 flex h-full flex-col justify-between p-4 px-8">
-          <a
-            className="text-2xl font-semibold tracking-tight text-black"
-            href="/"
-          >
-            Blog
-          </a>
-          <p className="text-black">
-            Photo by{' '}
-            <a
-              className="hover:underline"
-              href={siteConfig.unsplash.auth.signup.authorUrl}
-              target="_blank"
-            >
-              {siteConfig.unsplash.auth.signup.author}{' '}
-            </a>
-            on{' '}
-            <a
-              className="hover:underline"
-              href={siteConfig.unsplash.auth.signup.imagePageUrl}
-              target="_blank"
-            >
-              Unsplash
-            </a>
-          </p>
-        </div>
-      </div>
-
-      <div className="relative z-10 flex h-screen w-screen items-center justify-center p-8">
-        <div className="w-full max-w-[480px] rounded-xl border p-6 shadow bg-white">
-          <div className="flex flex-col space-y-1 pb-6">
-            <h1 className="text-2xl font-semibold tracking-tight text-black">
-              Sign up
-            </h1>
-            <p className="text-sm text-neutral-800">
-              Choose your preferred sign up method
-            </p>
-          </div>
-
-          {/* <%- include('./partials/oauth-signin.ejs') %> */}
-
-          <div className="grid gap-4">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t"></span>
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
-                  Or continue with
-                </span>
-              </div>
+    <Shell className="max-w-lg">
+      <Card className="bg-white lg:bg-transparent">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl">Sign up</CardTitle>
+          <CardDescription>
+            Choose your preferred sign up method
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          {/* <OAuthSignIn /> */}
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
             </div>
-
-            <SignUpForm />
-          </div>
-
-          <div className="flex flex-wrap items-center justify-between gap-2 py-2">
-            <div className="text-sm text-muted-foreground">
-              <span className="mr-1 hidden sm:inline-block">
-                Already have an account?{' '}
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                Or continue with
               </span>
-              <Link
-                aria-label="Sign in"
-                href="/signin"
-                className="text-primary underline-offset-4 transition-colors hover:underline"
-              >
-                Sign in
-              </Link>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+          <SignUpForm />
+        </CardContent>
+        <CardFooter>
+          <div className="text-sm text-muted-foreground">
+            Already have an account?{' '}
+            <Link
+              aria-label="Sign in"
+              href="/signin"
+              className="text-primary underline-offset-4 transition-colors hover:underline"
+            >
+              Sign in
+            </Link>
+          </div>
+        </CardFooter>
+      </Card>
+    </Shell>
   )
 }
