@@ -18,13 +18,15 @@ export const SiteHeader = ({ user }: SiteHeaderProps) => {
 
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-4">
-            <Link
-              href="/new-story"
-              className="text-xs font-medium flex items-center gap-2"
-            >
-              <Icons.pencil className="size-6" />
-              Write
-            </Link>
+            {user ? (
+              <Link
+                href="/new-story"
+                className="text-xs font-medium flex items-center gap-2"
+              >
+                <Icons.pencil className="size-6" />
+                Write
+              </Link>
+            ) : null}
             <PostsCombobox />
             <AuthDropdown user={user} />
           </nav>
