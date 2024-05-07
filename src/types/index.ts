@@ -22,7 +22,7 @@ export type StatusCode = keyof typeof HTPPErrorMessages
 
 export type ReasonPhrase = `${ReasonPhrases}`
 
-export type HTTPResponse<T> = {
+export type HTTPResponse<T = void> = {
   data: T | null
   message: ReasonPhrase
   status: StatusCode
