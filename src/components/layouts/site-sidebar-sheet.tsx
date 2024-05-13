@@ -15,16 +15,16 @@ import { User } from '@/types'
 import Link from 'next/link'
 import { Icons } from '../icons'
 
-export type LobbySidebarSheetProps = ButtonProps & {
+export type SiteSidebarSheetProps = ButtonProps & {
   user: User | null
 }
 
-export function LobbySidebarSheet({
+export function SiteSidebarSheet({
   children,
   className,
   user,
   ...props
-}: LobbySidebarSheetProps) {
+}: SiteSidebarSheetProps) {
   const { open, setOpen } = useSidebar()
   const isDesktop = useMediaQuery('(min-width: 1024px)')
   const initials = `${user?.email.charAt(0)}`

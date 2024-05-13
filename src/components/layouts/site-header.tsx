@@ -3,12 +3,12 @@ import { User } from '@/types'
 import Link from 'next/link'
 import { Button } from '../ui/button'
 
-interface LobbyHeaderProps {
+interface SiteHeaderProps {
   user: User | null
   children: React.ReactNode
 }
 
-export function LobbyHeader({ user, children }: LobbyHeaderProps) {
+export function SiteHeader({ user, children }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className={cn('flex items-center px-6', user ? 'h-0' : 'h-14 ')}>

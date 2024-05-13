@@ -8,16 +8,16 @@ import { Avatar, AvatarFallback } from '../ui/avatar'
 import { ScrollArea } from '../ui/scroll-area'
 import { SidebarNav } from './sidebar-nav'
 
-type LobbySidebarProps = React.HTMLAttributes<HTMLElement> & {
+type SiteSidebarProps = React.HTMLAttributes<HTMLElement> & {
   user: User | null
 }
 
-export default function LobbySidebar({
+export default function SiteSidebar({
   children,
   className,
   user,
   ...props
-}: LobbySidebarProps) {
+}: SiteSidebarProps) {
   const initials = `${user?.email.charAt(0)}`
 
   return (
