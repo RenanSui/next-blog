@@ -1,16 +1,16 @@
+import { Navbar } from '@/types'
+
 const links = {
   githubAccount: 'https://github.com/RenanSui',
 }
 
-const navbar = {
+const navbar: Navbar = {
   items: [
     {
       title: 'Home',
       href: '/',
-    },
-    {
-      title: 'Dashboard',
-      href: '/dashboard',
+      icon: 'pencil',
+      disabled: false,
     },
   ],
 }
