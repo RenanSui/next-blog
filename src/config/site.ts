@@ -9,7 +9,19 @@ const navbar: Navbar = {
     {
       title: 'Home',
       href: '/',
-      icon: 'pencil',
+      icon: 'home',
+      disabled: false,
+    },
+    {
+      title: 'Account',
+      href: '/account',
+      icon: 'avatar',
+      disabled: true,
+    },
+    {
+      title: 'Settings',
+      href: '/settings',
+      icon: 'settings',
       disabled: false,
     },
   ],
