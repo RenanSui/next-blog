@@ -1,51 +1,53 @@
-export function Search() {
+'use client'
+
+import { cn } from '@/lib/utils'
+import { SearchSchema, searchSchema } from '@/lib/validations/search'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form'
+import { Input } from '../ui/input'
+
+type SearchProps = Omit<React.ComponentPropsWithRef<'form'>, 'onSubmit'>
+
+export function Search({ className, ...props }: SearchProps) {
+  const router = useRouter()
+
+  const form = useForm<SearchSchema>({
+    resolver: zodResolver(searchSchema),
+    defaultValues: {
+      searchInput: '',
+    },
+  })
+
+  const onSubmit = async (input: SearchSchema) => {
+    router.push(`/post/search?searchInput=${input.searchInput}`)
+  }
+
   return (
     <div>
-      <form
-        action="/post/search"
-        role="search"
-        className="flex gap-1 items-center justify-center"
-      >
-        <div className="flex gap-1 items-center justify-center">
-          <input
-            type="text"
+      <Form {...form}>
+        <form
+          className={cn('grid w-full gap-4', className)}
+          onSubmit={form.handleSubmit(onSubmit)}
+          autoComplete="off"
+          {...props}
+        >
+          <FormField
+            control={form.control}
             name="searchInput"
-            aria-label="Search"
-            id="searchInput"
-            placeholder="Search"
-            className="bg-transparent max-w-[72px] px-2 text-black placeholder:text-black focus:bg-white"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl className="rounded-full">
+                  <Input placeholder="Search" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-          <label htmlFor="searchInput">
-            <span className="sr-only">Search</span>
-          </label>
-        </div>
-        <button type="submit">
-          <svg
-            width="17"
-            height="17"
-            viewBox="0 0 17 17"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              className="stroke-neutral-950"
-              d="M7.79167 13.4583C10.9213 13.4583 13.4583 10.9213 13.4583 7.79167C13.4583 4.66205 10.9213 2.125 7.79167 2.125C4.66205 2.125 2.125 4.66205 2.125 7.79167C2.125 10.9213 4.66205 13.4583 7.79167 13.4583Z"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              className="stroke-neutral-950"
-              d="M14.875 14.875L11.7938 11.7938"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </form>
+        </form>
+      </Form>
     </div>
   )
 }
