@@ -1,8 +1,20 @@
+import { Icons } from '@/components/icons'
 import { HTPPErrorMessages } from '@/lib/handle-auth-error'
 import { ReasonPhrases } from 'http-status-codes'
 
 // type StrToNum<Str> = Str extends `${infer Num extends number}` ? Num : Str
 // export type StatusCode = StrToNum<`${StatusCodes}`>
+
+export type SidebarNavItem = {
+  title: string
+  href: string
+  icon?: keyof typeof Icons
+  disabled: boolean
+}
+
+export type Navbar = {
+  items: SidebarNavItem[]
+}
 
 export type Post = {
   _id: string
