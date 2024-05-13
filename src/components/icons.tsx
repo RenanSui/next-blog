@@ -1,6 +1,11 @@
+import { AvatarIcon, GearIcon, HomeIcon } from '@radix-ui/react-icons'
+
 export type IconProps = React.HTMLAttributes<SVGElement>
 
 export const Icons = {
+  settings: GearIcon,
+  home: HomeIcon,
+  avatar: AvatarIcon,
   spinner: (props: IconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
