@@ -20,7 +20,7 @@ export default async function LobbyLayout({
           user={user}
         />
         <div className="flex">
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             <SiteHeader user={user}>
               <SiteSidebarSheet user={user}>
                 <SiteSidebar user={user} />
