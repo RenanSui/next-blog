@@ -26,7 +26,7 @@ export default async function LobbyLayout({
                 <SiteSidebar user={user} />
               </SiteSidebarSheet>
             </SiteHeader>
-            <main className="flex-1 overflow-hidden px-6">{children}</main>
+            <main className="flex-1 overflow-hidden">{children}</main>
           </div>
           <LobbySidebar className="top-0 max-w-[320px] p-4 z-30 hidden flex-col gap-4 border-l border-border/60 lg:sticky lg:block" />
         </div>
