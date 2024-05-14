@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils'
 import { User } from '@/types'
 import Link from 'next/link'
 import { Icons } from '../icons'
+import UserAvatar from '../user-avatar'
 
 export type SiteSidebarSheetProps = ButtonProps & {
   user: User | null
@@ -45,9 +46,7 @@ export function SiteSidebarSheet({
           {...props}
         >
           {user ? (
-            <Avatar className="size-8">
-              <AvatarFallback className="capitalize">{initials}</AvatarFallback>
-            </Avatar>
+            <UserAvatar user={user} />
           ) : (
             <Icons.menu aria-hidden="true" className="size-8" />
           )}
