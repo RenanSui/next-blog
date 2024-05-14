@@ -14,13 +14,13 @@ const navbar: Navbar = {
     },
     {
       title: 'Account',
-      href: '/account',
+      href: '/dashboard/account',
       icon: 'avatar',
       disabled: true,
     },
     {
       title: 'Settings',
-      href: '/settings',
+      href: '/dashboard/settings',
       icon: 'settings',
       disabled: false,
     },
