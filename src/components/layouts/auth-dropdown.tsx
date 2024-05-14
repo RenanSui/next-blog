@@ -1,7 +1,6 @@
 import { DashboardIcon, ExitIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -15,6 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 import { User } from '@/types'
+import UserAvatar from '../user-avatar'
 
 interface AuthDropdownProps
   extends React.ComponentPropsWithRef<typeof DropdownMenuTrigger>,
@@ -23,7 +23,6 @@ interface AuthDropdownProps
 }
 
 export function AuthDropdown({ user, className, ...props }: AuthDropdownProps) {
-  const initials = `${user?.email.charAt(0)}`
   const email = `${user?.email}`
 
   return (
@@ -36,12 +35,7 @@ export function AuthDropdown({ user, className, ...props }: AuthDropdownProps) {
               className={cn('size-8 rounded-full', className)}
               {...props}
             >
-              <Avatar className="size-8">
-                {/* <AvatarImage src={user.imageUrl} alt={user.username ?? ''} /> */}
-                <AvatarFallback className="capitalize">
-                  {initials}
-                </AvatarFallback>
-              </Avatar>
+              <UserAvatar user={user} />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end" forceMount>
