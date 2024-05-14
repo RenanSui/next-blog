@@ -4,9 +4,9 @@ import { User } from '@/types'
 import Link from 'next/link'
 import * as React from 'react'
 import { Icons } from '../icons'
-import { Avatar, AvatarFallback } from '../ui/avatar'
 import { ScrollArea } from '../ui/scroll-area'
 import { SidebarNav } from './sidebar-nav'
+import UserAvatar from '../user-avatar'
 
 type SiteSidebarProps = React.HTMLAttributes<HTMLElement> & {
   user: User | null
@@ -18,8 +18,6 @@ export default function SiteSidebar({
   user,
   ...props
 }: SiteSidebarProps) {
-  const initials = `${user?.email.charAt(0)}`
-
   return (
     <aside className={cn('h-screen w-full', className)} {...props}>
       <div className="hidden h-[3.55rem] items-center border-border/60 lg:flex">
@@ -28,9 +26,7 @@ export default function SiteSidebar({
           className="flex w-fit items-center font-heading tracking-wider text-foreground/90 transition-colors hover:text-foreground"
         >
           {user ? (
-            <Avatar className="size-8">
-              <AvatarFallback className="capitalize">{initials}</AvatarFallback>
-            </Avatar>
+            <UserAvatar user={user} />
           ) : (
             <Icons.menu aria-hidden="true" className="size-8" />
           )}
