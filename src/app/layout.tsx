@@ -1,6 +1,7 @@
 import { fontHeading, fontMono, fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
 import { Toaster } from 'sonner'
 import '../styles/globals.css'
 
@@ -25,7 +26,9 @@ export default function RootLayout({
         )}
       >
         <Toaster />
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
