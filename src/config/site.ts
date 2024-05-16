@@ -13,8 +13,8 @@ const navbar: Navbar = {
       disabled: false,
     },
     {
-      title: 'Account',
-      href: '/dashboard/account',
+      title: 'Profile',
+      href: '/dashboard/profile',
       icon: 'avatar',
       disabled: true,
     },
