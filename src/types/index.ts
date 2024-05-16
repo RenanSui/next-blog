@@ -1,5 +1,4 @@
 import { Icons } from '@/components/icons'
-import { HTPPErrorMessages } from '@/lib/handle-auth-error'
 import { ReasonPhrases } from 'http-status-codes'
 
 // type StrToNum<Str> = Str extends `${infer Num extends number}` ? Num : Str
@@ -33,14 +32,12 @@ export type User = {
   isAdmin: boolean
 }
 
-export type StatusCode = keyof typeof HTPPErrorMessages
-
 export type ReasonPhrase = `${ReasonPhrases}`
 
-export type HTTPResponse<T = void> = {
+export type HTTPResponse<T = void, B = void> = {
   data: T | null
   message: ReasonPhrase
-  status: StatusCode
+  status: B
 }
 
 export type Auth = { accessToken: string }
