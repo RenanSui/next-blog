@@ -4,6 +4,7 @@ import { SiteSidebarSheet } from '@/components/layouts/site-sidebar-sheet'
 import { SidebarProvider } from '@/hooks/use-sidebar'
 import { getUser } from '@/lib/actions/user'
 import LobbySidebar from '../(lobby)/_components/lobby-sidebar'
+import { redirect } from 'next/navigation'
 
 export default async function DashboardLayout({
   children,
@@ -11,6 +12,7 @@ export default async function DashboardLayout({
   children: React.ReactNode
 }>) {
   const user = await getUser()
+  if (!user) redirect('/signin')
 
   return (
     <SidebarProvider>
