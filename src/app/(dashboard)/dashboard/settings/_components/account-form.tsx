@@ -1,6 +1,7 @@
 'use client'
 
 import { LoadingButton } from '@/components/loading-button'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Form,
   FormControl,
@@ -12,6 +13,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { updateProfile } from '@/lib/actions/user'
 import { UserErrorHandler } from '@/lib/handle-user-error'
+import { cn } from '@/lib/utils'
 import { UpdateUserSchema, updateUserSchema } from '@/lib/validations/user'
 import { User } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -24,11 +26,14 @@ type AccountFormProps = {
 }
 
 export const AccountForm = ({ user }: AccountFormProps) => {
+  const initials = `${user?.email.charAt(0)}`
+
   const form = useForm<z.z.infer<typeof updateUserSchema>>({
     resolver: zodResolver(updateUserSchema),
     defaultValues: {
       name: user?.name ?? '',
       username: user?.username ?? '',
+      imageUrl: user?.imageUrl ?? '',
     },
   })
 
@@ -79,6 +84,31 @@ export const AccountForm = ({ user }: AccountFormProps) => {
                     form.setValue('username', value.replace(/\s+/g, ''))
                   }}
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="imageUrl"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>
+                Image URL
+                <Required />
+              </FormLabel>
+              <FormControl>
+                <div className="space-y-2">
+                  <Input placeholder="potatoheadcoolemail" {...field} />
+                  <Avatar className={cn('size-11')}>
+                    <AvatarImage src={field.value} alt="user image" />
+                    <AvatarFallback className="capitalize">
+                      {initials}
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
