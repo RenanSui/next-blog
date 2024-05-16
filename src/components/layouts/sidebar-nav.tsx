@@ -14,10 +14,7 @@ export const SidebarNav = ({ className, items, ...props }: SidebarNavProps) => {
   if (!items?.length) return null
 
   return (
-    <div
-      className={cn('flex w-full flex-col gap-2 text-sm', className)}
-      {...props}
-    >
+    <div className={cn('flex w-full flex-col text-sm', className)} {...props}>
       {items.map((item, index) => {
         const Icon = item.icon ? Icons[item.icon] : ChevronLeftIcon
 
@@ -30,11 +27,11 @@ export const SidebarNav = ({ className, items, ...props }: SidebarNavProps) => {
           >
             <span
               className={cn(
-                'group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:bg-muted hover:text-foreground',
+                'group flex w-fit items-center border border-transparent p-2 hover:bg-muted hover:text-foreground gap-2 rounded-full',
                 item.disabled && 'pointer-events-none opacity-60',
               )}
             >
-              <Icon className="mr-2 size-4" aria-hidden="true" />
+              <Icon className="mr-2 size-8" aria-hidden="true" />
               <span>{item.title}</span>
             </span>
           </Link>
