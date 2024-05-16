@@ -1,4 +1,4 @@
-import { DashboardIcon, ExitIcon } from '@radix-ui/react-icons'
+import { DashboardIcon, ExitIcon, SunIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
 import { Button, type ButtonProps } from '@/components/ui/button'
@@ -9,12 +9,12 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 import { User } from '@/types'
 import UserAvatar from '../user-avatar'
+import { ThemeToggle } from './theme-toggle'
 
 interface AuthDropdownProps
   extends React.ComponentPropsWithRef<typeof DropdownMenuTrigger>,
@@ -30,15 +30,18 @@ export function AuthDropdown({ user, className, ...props }: AuthDropdownProps) {
       {user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant="secondary"
-              className={cn('size-8 rounded-full', className)}
+            <button
+              className="flex gap-3 outline-none hover:bg-muted/60 p-2 pr-8 rounded-full"
               {...props}
             >
-              <UserAvatar user={user} />
-            </Button>
+              <UserAvatar user={user} className="size-11" />
+              <div className="-space-y-1.5 flex flex-col">
+                <span className="self-start">シド</span>
+                <span className="text-muted-foreground/50">@adsjksui</span>
+              </div>
+            </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end" forceMount>
+          <DropdownMenuContent className="w-56 mx-8" align="center" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">
@@ -52,19 +55,27 @@ export function AuthDropdown({ user, className, ...props }: AuthDropdownProps) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link href="/dashboard">
+                <Link href="/dashboard/account">
                   <DashboardIcon className="mr-2 size-4" aria-hidden="true" />
                   Dashboard
-                  <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
                 </Link>
               </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <div className="flex px-2 items-center py-1.5 justify-between">
+                <div className="flex items-center text-sm">
+                  <SunIcon className="mr-2 size-4" aria-hidden="true" />
+                  Theme
+                </div>
+                <ThemeToggle combobox />
+              </div>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link href="/signout">
                 <ExitIcon className="mr-2 size-4" aria-hidden="true" />
                 Log out
-                <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
