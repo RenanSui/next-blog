@@ -1,4 +1,4 @@
-import { DashboardIcon, ExitIcon, SunIcon } from '@radix-ui/react-icons'
+import { ExitIcon, SunIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
 import { Button, type ButtonProps } from '@/components/ui/button'
@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 import { User } from '@/types'
+import { Icons } from '../icons'
 import UserAvatar from '../user-avatar'
 import { ThemeToggle } from './theme-toggle'
 
@@ -36,17 +37,17 @@ export function AuthDropdown({ user, className, ...props }: AuthDropdownProps) {
             >
               <UserAvatar user={user} className="size-11" />
               <div className="-space-y-1.5 flex flex-col">
-                <span className="self-start">シド</span>
-                <span className="text-muted-foreground/50">@adsjksui</span>
+                <span className="self-start">{user.name}</span>
+                <span className="text-muted-foreground/50 self-start">
+                  @{user.username}
+                </span>
               </div>
             </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56 mx-8" align="center" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">
-                  {/* {user.firstName} {user.lastName} */}
-                </p>
+                <p className="text-sm font-medium leading-none">{user.name}</p>
                 <p className="text-xs leading-none text-muted-foreground">
                   {email}
                 </p>
@@ -55,9 +56,15 @@ export function AuthDropdown({ user, className, ...props }: AuthDropdownProps) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link href="/dashboard/account">
-                  <DashboardIcon className="mr-2 size-4" aria-hidden="true" />
-                  Dashboard
+                <Link href="/dashboard/profile">
+                  <Icons.avatar className="mr-2 size-4" aria-hidden="true" />
+                  Profile
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/settings">
+                  <Icons.settings className="mr-2 size-4" aria-hidden="true" />
+                  Settings
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
