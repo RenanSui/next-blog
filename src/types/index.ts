@@ -25,8 +25,11 @@ export type Post = {
 }
 
 export type User = {
+  name: string
+  username: string
   email: string
   password: string
+  imageUrl: string
   isAdmin: boolean
 }
 
