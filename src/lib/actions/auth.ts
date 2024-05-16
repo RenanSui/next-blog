@@ -1,8 +1,9 @@
 'use server'
 
-import { Auth, HTTPResponse, StatusCode } from '@/types'
+import { Auth, HTTPResponse } from '@/types'
 import { cookies } from 'next/headers'
 import { z } from 'zod'
+import { AuthStatusCode } from '../handle-auth-error'
 import { authSchema } from '../validations/auth'
 
 type Inputs = z.infer<typeof authSchema>
@@ -31,7 +32,8 @@ export const signIn = async (formData: Inputs) => {
     body: JSON.stringify({ ...parsed.data }),
   })
 
-  const { data, message, status }: HTTPResponse<Auth> = await response.json()
+  const { data, message, status }: HTTPResponse<Auth, AuthStatusCode> =
+    await response.json()
 
   if (data?.accessToken) {
     cookieStore.set('accessToken', data.accessToken, {
@@ -68,7 +70,8 @@ export const signUp = async (formData: Inputs) => {
     body: JSON.stringify({ ...parsed.data }),
   })
 
-  const { data, message, status }: HTTPResponse<Auth> = await response.json()
+  const { data, message, status }: HTTPResponse<Auth, AuthStatusCode> =
+    await response.json()
 
   if (data?.accessToken) {
     cookieStore.set('accessToken', data.accessToken, {
@@ -87,7 +90,7 @@ export const signOut = async () => {
   const accessToken = cookieStore.get('accessToken')?.value
 
   if (accessToken) {
-    return { status: 400 } as { status: StatusCode }
+    return { status: 400 } as { status: AuthStatusCode }
   }
-  return { status: 200 } as { status: StatusCode }
+  return { status: 200 } as { status: AuthStatusCode }
 }
