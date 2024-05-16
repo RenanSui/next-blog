@@ -6,6 +6,7 @@ export const updateUserSchema = zfd.formData({
   username: zfd
     .text(z.string().min(2))
     .transform((value) => value.replace(/\s+/g, '').trim()),
+  imageUrl: zfd.text(),
 })
 
 export type UpdateUserSchema = z.infer<typeof updateUserSchema>
