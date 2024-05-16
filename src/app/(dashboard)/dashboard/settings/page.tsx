@@ -5,8 +5,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { getUser } from '@/lib/actions/user'
+import { AccountForm } from './_components/account-form'
 
 export default async function SettingsPage() {
+  const user = await getUser()
+
   return (
     <div className="space-y-6">
       <Card>
@@ -14,7 +18,9 @@ export default async function SettingsPage() {
           <CardTitle>Update your Profile</CardTitle>
           <CardDescription>Manage your Account settings</CardDescription>
         </CardHeader>
-        <CardContent></CardContent>
+        <CardContent>
+          <AccountForm user={user} />
+        </CardContent>
       </Card>
     </div>
   )
