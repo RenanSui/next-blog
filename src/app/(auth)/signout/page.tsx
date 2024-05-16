@@ -4,11 +4,13 @@ import {
   PageHeaderHeading,
 } from '@/components/page-header'
 import { Shell } from '@/components/shell'
+import { getUser } from '@/lib/actions/user'
+import { redirect } from 'next/navigation'
 import { SignoutButton } from '../_components/signout-button'
 
 export default async function Page() {
-  // const user = await getUser()
-  // if (!user) redirect('/signin')
+  const user = await getUser()
+  if (!user) redirect('/signin')
 
   return (
     <Shell className="max-w-md bg-white lg:bg-transparent rounded-xl border">
