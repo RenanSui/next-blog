@@ -1,4 +1,3 @@
-import { StatusCode } from '@/types'
 import { StatusCodes } from 'http-status-codes'
 
 export const HTPPErrorMessages = {
@@ -10,7 +9,9 @@ export const HTPPErrorMessages = {
   409: 'User already exist.',
 }
 
-export function AuthErrorHandler(status?: StatusCode) {
+export type AuthStatusCode = keyof typeof HTPPErrorMessages
+
+export function AuthErrorHandler(status?: AuthStatusCode) {
   if (!status) return
 
   if (status === StatusCodes.OK) return
