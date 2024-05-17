@@ -1,20 +1,35 @@
-import PostShell from '@/components/post-shell'
+import { PostCard } from '@/components/post-card'
+import { PostCardSkeleton } from '@/components/post-card-skeleton'
+import { PostFormShell } from '@/components/post-form-shell'
 import { Shell } from '@/components/shell'
 import { getPosts } from '@/lib/actions/post'
-import { getUser } from '@/lib/actions/user'
+import { getMe } from '@/lib/actions/user'
+import * as React from 'react'
 
 type LobbyProps = {
   postsPromise: ReturnType<typeof getPosts>
+  userPromise: ReturnType<typeof getMe>
 }
 
-export async function Lobby({ postsPromise }: LobbyProps) {
-  const { posts, error } = await postsPromise
-  console.log(posts, error)
-  const user = await getUser()
+export async function Lobby({ postsPromise, userPromise }: LobbyProps) {
+  const user = await userPromise
+  const { posts } = await postsPromise
 
   return (
-    <Shell variant="sidebar" className="pt-0 md:py-0">
-      <PostShell user={user} />
+    <Shell variant="sidebar" className="pt-0 md:py-0 gap-0">
+      <PostFormShell user={user} />
+      <section>
+        <h1 className="sr-only">Posts</h1>
+        <React.Suspense
+          fallback={Array.from({ length: 10 }).map((_, i) => (
+            <PostCardSkeleton key={i} />
+          ))}
+        >
+          {posts?.map((post) => {
+            return <PostCard key={`post-${post._id}`} post={post} />
+          })}
+        </React.Suspense>
+      </section>
     </Shell>
   )
 
