@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form'
 import { Button } from './ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from './ui/form'
 import UserAvatar from './user-avatar'
+import { createPost } from '@/lib/actions/post'
 
 type PostShellProps = Omit<React.ComponentPropsWithRef<'form'>, 'onSubmit'> & {
   user: Awaited<ReturnType<typeof getUser>>
@@ -28,8 +29,8 @@ export default function PostShell({
     },
   })
 
-  const onSubmit = (input: CreatePostSchema) => {
-    console.log({ input })
+  const onSubmit = (formData: CreatePostSchema) => {
+    createPost(formData)
 
     if (inputBodyRef.current) inputBodyRef.current.textContent = ''
     form.setValue('body', '')
@@ -63,10 +64,10 @@ export default function PostShell({
                       onInput={onInput}
                       className={cn(
                         'flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring //disabled:cursor-not-allowed disabled:opacity-50',
-                        'editableDiv2 border-transparent overflow-hidden focus-visible:ring-0 resize-none text-xl py-0 pt-2 font-serif text-muted-foreground cursor-text',
+                        'editableDiv2 border-transparent overflow-hidden focus-visible:ring-0 resize-none text-base py-0 pt-2 text-muted-foreground cursor-text',
                       )}
                       contentEditable
-                      data-placeholder="Tell your story..."
+                      data-placeholder="Write your story..."
                       role="textbox"
                       ref={inputBodyRef}
                     ></div>

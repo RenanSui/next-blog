@@ -1,15 +1,17 @@
 'use server'
 
 import { HTTPResponse, Post } from '@/types'
+import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { z } from 'zod'
+import { PostStatusCode } from '../handle-post-error'
 import { createPostSchema } from '../validations/post'
-import { revalidatePath } from 'next/cache'
 
 export async function getPosts() {
   try {
-    const response = await fetch(`${process.env.SERVER_URL}/blog/post`)
-    const { data, status }: HTTPResponse<Post[]> = await response.json()
+    const response = await fetch(`${process.env.SERVER_URL}/post`)
+    const { data, status }: HTTPResponse<Post[], PostStatusCode> =
+      await response.json()
 
     if (status && status !== 200) {
       throw new Error('No post were found')
@@ -24,8 +26,9 @@ export async function getPosts() {
 
 export async function getPostById(id: string) {
   try {
-    const response = await fetch(`${process.env.SERVER_URL}/blog/post/id/${id}`)
-    const { data, status }: HTTPResponse<Post> = await response.json()
+    const response = await fetch(`${process.env.SERVER_URL}/post/id/${id}`)
+    const { data, status }: HTTPResponse<Post, PostStatusCode> =
+      await response.json()
 
     if (status && status !== 200) {
       throw new Error('No post were found')
@@ -40,14 +43,15 @@ export async function getPostById(id: string) {
 
 export async function getPostBySearch(searchInput: string) {
   try {
-    const response = await fetch(`${process.env.SERVER_URL}/blog/post/search`, {
+    const response = await fetch(`${process.env.SERVER_URL}/post/search`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ searchInput }),
     })
-    const { data, status }: HTTPResponse<Post[]> = await response.json()
+    const { data, status }: HTTPResponse<Post[], PostStatusCode> =
+      await response.json()
 
     if (status && status !== 200) {
       throw new Error('No post were found')
@@ -67,7 +71,7 @@ export async function createPost(formData: CreatePostFormData) {
     const cookieStore = cookies()
     const accessToken = cookieStore.get('accessToken')?.value ?? ''
 
-    const response = await fetch(`${process.env.SERVER_URL}/blog/post/create`, {
+    const response = await fetch(`${process.env.SERVER_URL}/post/create`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -77,9 +81,10 @@ export async function createPost(formData: CreatePostFormData) {
       body: JSON.stringify({ ...formData }),
     })
 
-    const { status, message }: HTTPResponse = await response.json()
+    const { status, message }: HTTPResponse<null, PostStatusCode> =
+      await response.json()
 
-    console.log({ status, message })
+    console.log({ message })
 
     if (status && status !== 200) {
       throw new Error('An error has occurred')
