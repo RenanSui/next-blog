@@ -17,7 +17,7 @@ export type Navbar = {
 
 export type Post = {
   _id: string
-  title: string
+  userId: string
   body: string
   createdAt: Date
   updateAt: Date
