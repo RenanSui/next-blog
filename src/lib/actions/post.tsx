@@ -17,7 +17,16 @@ export async function getPosts() {
       throw new Error('No post were found')
     }
 
-    return { posts: data, error: null }
+    const posts = data
+      ?.sort((item1, item2) => {
+        return (
+          new Date(item1.createdAt).getTime() -
+          new Date(item2.createdAt).getTime()
+        )
+      })
+      .reverse()
+
+    return { posts, error: null }
   } catch (err) {
     const error = err as Error
     return { posts: null, error }
