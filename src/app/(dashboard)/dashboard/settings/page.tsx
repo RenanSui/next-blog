@@ -1,15 +1,15 @@
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card'
-import { getUser } from '@/lib/actions/user'
+import { getMe } from '@/lib/actions/user'
 import { AccountForm } from './_components/account-form'
 
 export default async function SettingsPage() {
-  const user = await getUser()
+  const user = await getMe()
 
   return (
     <div className="space-y-6">

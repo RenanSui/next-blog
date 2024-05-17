@@ -2,16 +2,16 @@ import { SiteHeader } from '@/components/layouts/site-header'
 import SiteSidebar from '@/components/layouts/site-sidebar'
 import { SiteSidebarSheet } from '@/components/layouts/site-sidebar-sheet'
 import { SidebarProvider } from '@/hooks/use-sidebar'
-import { getUser } from '@/lib/actions/user'
-import LobbySidebar from '../(lobby)/_components/lobby-sidebar'
+import { getMe } from '@/lib/actions/user'
 import { redirect } from 'next/navigation'
+import LobbySidebar from '../(lobby)/_components/lobby-sidebar'
 
 export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const user = await getUser()
+  const user = await getMe()
   if (!user) redirect('/signin')
 
   return (

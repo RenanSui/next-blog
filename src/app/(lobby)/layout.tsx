@@ -2,7 +2,7 @@ import { SiteHeader } from '@/components/layouts/site-header'
 import SiteSidebar from '@/components/layouts/site-sidebar'
 import { SiteSidebarSheet } from '@/components/layouts/site-sidebar-sheet'
 import { SidebarProvider } from '@/hooks/use-sidebar'
-import { getUser } from '@/lib/actions/user'
+import { getMe } from '@/lib/actions/user'
 import LobbySidebar from './_components/lobby-sidebar'
 
 export default async function LobbyLayout({
@@ -10,7 +10,7 @@ export default async function LobbyLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const user = await getUser()
+  const user = await getMe()
 
   return (
     <SidebarProvider>

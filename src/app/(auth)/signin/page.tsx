@@ -1,19 +1,19 @@
 import { Shell } from '@/components/shell'
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card'
-import { getUser } from '@/lib/actions/user'
+import { getMe } from '@/lib/actions/user'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import SignInForm from '../_components/signin-form'
 
 export default async function Page() {
-  const user = await getUser()
+  const user = await getMe()
   if (user) redirect('/signout')
 
   return (

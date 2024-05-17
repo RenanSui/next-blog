@@ -1,10 +1,10 @@
-import { getUser } from '@/lib/actions/user'
+import { getMe } from '@/lib/actions/user'
 import { cn } from '@/lib/utils'
 import * as React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 type UserAvatarProps = React.HTMLAttributes<HTMLSpanElement> & {
-  user?: Awaited<ReturnType<typeof getUser>>
+  user?: Awaited<ReturnType<typeof getMe>>
 }
 
 export default function UserAvatar({ className, user }: UserAvatarProps) {
