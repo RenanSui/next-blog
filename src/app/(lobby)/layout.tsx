@@ -1,15 +1,17 @@
+import { Search } from '@/components/layouts/search'
 import { SiteHeader } from '@/components/layouts/site-header'
 import SiteSidebar from '@/components/layouts/site-sidebar'
 import { SiteSidebarSheet } from '@/components/layouts/site-sidebar-sheet'
 import { SidebarProvider } from '@/hooks/use-sidebar'
 import { getMe } from '@/lib/actions/user'
-import LobbySidebar from './_components/lobby-sidebar'
+import { cn } from '@/lib/utils'
+import { SearchShell } from './post/search/_components/search-shell'
 
-export default async function LobbyLayout({
-  children,
-}: Readonly<{
+type LobbyLayoutProps = {
   children: React.ReactNode
-}>) {
+}
+
+export default async function LobbyLayout({ children }: LobbyLayoutProps) {
   const user = await getMe()
 
   return (
@@ -28,7 +30,18 @@ export default async function LobbyLayout({
             </SiteHeader>
             <main className="flex-1 overflow-hidden">{children}</main>
           </div>
-          <LobbySidebar className="top-0 max-w-[320px] p-4 z-30 hidden flex-col gap-4 border-l border-border/60 lg:sticky lg:block" />
+          <aside
+            className={cn(
+              'h-screen w-full space-y-4 top-0 max-w-[320px] p-4 z-30 hidden flex-col gap-4 border-l border-border/60 lg:sticky lg:block',
+            )}
+          >
+            <SearchShell>
+              <Search />
+            </SearchShell>
+            <div className="rounded-xl border border-border/60 p-4">
+              <h1>Trending</h1>
+            </div>
+          </aside>
         </div>
       </div>
     </SidebarProvider>
