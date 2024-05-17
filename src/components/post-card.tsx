@@ -20,18 +20,21 @@ export async function PostCard({ post }: PostCardProps) {
   const initials = `${user?.email.charAt(0)}`
 
   return (
-    <div className="border-b border-border px-6 py-4 flex gap-3">
-      <Link href={`/profile/${user.username}`}>
+    <Link
+      className="border-b border-border px-6 py-4 flex gap-3"
+      href={`/post/${post._id}`}
+    >
+      <div>
         <Avatar className={cn('size-11')}>
           <AvatarImage src={user.imageUrl} alt={user.username} />
           <AvatarFallback className="capitalize">{initials}</AvatarFallback>
         </Avatar>
-      </Link>
+      </div>
       <div>
         <div className="space-x-2 flex items-center">
           <Link
             className="self-start hover:underline font-bold"
-            href={`/profile/${user.username}`}
+            href={`/profile/${user.username}/aoba`}
           >
             {user.name}
           </Link>
@@ -41,6 +44,6 @@ export async function PostCard({ post }: PostCardProps) {
         </div>
         <p className="line-clamp-3 font-light">{post.body}</p>
       </div>
-    </div>
+    </Link>
   )
 }
