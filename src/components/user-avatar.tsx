@@ -7,7 +7,7 @@ type UserAvatarProps = React.HTMLAttributes<HTMLSpanElement> & {
   user?: Awaited<ReturnType<typeof getMe>>
 }
 
-export default function UserAvatar({ className, user }: UserAvatarProps) {
+export function UserAvatar({ className, user }: UserAvatarProps) {
   const initials = `${user?.email.charAt(0)}`
 
   return user ? (

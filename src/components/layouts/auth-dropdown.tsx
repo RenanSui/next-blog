@@ -14,7 +14,7 @@ import {
 import { cn } from '@/lib/utils'
 import { User } from '@/types'
 import { Icons } from '../icons'
-import UserAvatar from '../user-avatar'
+import { UserAvatar } from '../user-avatar'
 import { ThemeToggle } from './theme-toggle'
 
 interface AuthDropdownProps

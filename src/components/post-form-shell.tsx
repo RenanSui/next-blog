@@ -9,7 +9,7 @@ import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from './ui/button'
 import { Form, FormControl, FormField, FormItem, FormMessage } from './ui/form'
-import UserAvatar from './user-avatar'
+import { UserAvatar } from './user-avatar'
 
 type PostFormShellProps = Omit<
   React.ComponentPropsWithRef<'form'>,

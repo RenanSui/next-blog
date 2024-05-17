@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
 import { User } from '@/types'
 import Link from 'next/link'
 import { Icons } from '../icons'
-import UserAvatar from '../user-avatar'
+import { UserAvatar } from '../user-avatar'
 
 export type SiteSidebarSheetProps = ButtonProps & {
   user: User | null
