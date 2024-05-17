@@ -10,15 +10,17 @@ import { useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem } from '../ui/form'
 import { Input } from '../ui/input'
 
-type SearchProps = Omit<React.ComponentPropsWithRef<'form'>, 'onSubmit'>
+type SearchProps = Omit<React.ComponentPropsWithRef<'form'>, 'onSubmit'> & {
+  searchInput?: string
+}
 
-export function Search({ className, ...props }: SearchProps) {
+export function Search({ searchInput, className, ...props }: SearchProps) {
   const router = useRouter()
 
   const form = useForm<SearchSchema>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
-      searchInput: '',
+      searchInput: searchInput ?? '',
     },
   })
 
