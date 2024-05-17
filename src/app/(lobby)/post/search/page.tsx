@@ -20,7 +20,7 @@ export default async function Page({
         <Link href="/" className="hover:bg-border/60 p-2 rounded-full">
           <ArrowLeftIcon className="size-5" />
         </Link>
-        <Search className="w-full" />
+        <Search className="w-full" searchInput={searchInput} />
       </div>
       <section>
         <h1 className="sr-only">Posts</h1>
