@@ -1,12 +1,13 @@
 'use server'
 
 import { HTTPResponse, User } from '@/types'
+import console from 'console'
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { UserStatusCode } from '../handle-user-error'
 import { UpdateUserSchema } from '../validations/user'
 
-export const getUser = async () => {
+export const getMe = async () => {
   try {
     const cookieStore = cookies()
 
@@ -25,6 +26,38 @@ export const getUser = async () => {
 
     return user
   } catch (error) {
+    const user = null
+    return user
+  }
+}
+
+export const getUser = async (id: string) => {
+  try {
+    const cookieStore = cookies()
+
+    const accessToken = cookieStore.get('accessToken')?.value ?? ''
+
+    const response = await fetch(`${process.env.SERVER_URL}/user`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ id }),
+    })
+
+    const {
+      data: user,
+      status,
+      message,
+    }: HTTPResponse<User, UserStatusCode> = await response.json()
+
+    console.log({ status, message })
+
+    return user
+  } catch (error) {
+    console.log({ error })
     const user = null
     return user
   }
