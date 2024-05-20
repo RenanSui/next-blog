@@ -8,11 +8,10 @@ import { UserStatusCode } from '../handle-user-error'
 import { UpdateUserSchema } from '../validations/user'
 
 export const getMe = async () => {
+  const cookieStore = cookies()
+  const accessToken = cookieStore.get('accessToken')?.value ?? ''
+
   try {
-    const cookieStore = cookies()
-
-    const accessToken = cookieStore.get('accessToken')?.value ?? ''
-
     const response = await fetch(`${process.env.SERVER_URL}/me`, {
       credentials: 'include',
       headers: {
@@ -32,11 +31,10 @@ export const getMe = async () => {
 }
 
 export const getUser = async (id: string) => {
+  const cookieStore = cookies()
+  const accessToken = cookieStore.get('accessToken')?.value ?? ''
+
   try {
-    const cookieStore = cookies()
-
-    const accessToken = cookieStore.get('accessToken')?.value ?? ''
-
     const response = await fetch(`${process.env.SERVER_URL}/user`, {
       method: 'POST',
       credentials: 'include',
@@ -64,10 +62,10 @@ export const getUser = async (id: string) => {
 }
 
 export const getUserByUsername = async (username: string) => {
-  try {
-    const cookieStore = cookies()
+  const cookieStore = cookies()
+  const accessToken = cookieStore.get('accessToken')?.value ?? ''
 
-    const accessToken = cookieStore.get('accessToken')?.value ?? ''
+  try {
     const response = await fetch(`${process.env.SERVER_URL}/user/username`, {
       method: 'POST',
       credentials: 'include',

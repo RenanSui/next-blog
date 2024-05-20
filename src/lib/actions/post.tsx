@@ -99,10 +99,10 @@ export async function getPostBySearch(searchInput: string) {
 type CreatePostFormData = z.infer<typeof createPostSchema>
 
 export async function createPost(formData: CreatePostFormData) {
-  try {
-    const cookieStore = cookies()
-    const accessToken = cookieStore.get('accessToken')?.value ?? ''
+  const cookieStore = cookies()
+  const accessToken = cookieStore.get('accessToken')?.value ?? ''
 
+  try {
     const response = await fetch(`${process.env.SERVER_URL}/post/create`, {
       method: 'POST',
       credentials: 'include',

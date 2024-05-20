@@ -20,8 +20,8 @@ export const signIn = async (formData: Inputs) => {
   }
 
   const cookieStore = cookies()
-
   const accessToken = cookieStore.get('accessToken')?.value ?? ''
+
   const response = await fetch(`${process.env.SERVER_URL}/auth/sign-in`, {
     method: 'POST',
     credentials: 'include',
@@ -58,8 +58,8 @@ export const signUp = async (formData: Inputs) => {
   }
 
   const cookieStore = cookies()
-
   const accessToken = cookieStore.get('accessToken')?.value ?? ''
+
   const response = await fetch(`${process.env.SERVER_URL}/auth/sign-up`, {
     method: 'POST',
     credentials: 'include',
