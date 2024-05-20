@@ -30,6 +30,8 @@ export type User = {
   password: string
   imageUrl: string
   isAdmin: boolean
+  createdAt: string
+  updatedAt: string
 }
 
 export type ReasonPhrase = `${ReasonPhrases}`
