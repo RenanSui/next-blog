@@ -1,11 +1,11 @@
 import { Search } from '@/components/layouts/search'
-import { PostCard } from '@/components/post-card'
 import { PostCardSkeleton } from '@/components/post-card-skeleton'
 import { Shell } from '@/components/shell'
 import { getPostBySearch } from '@/lib/actions/post'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 import * as React from 'react'
+import { PostCardLink } from '../../_components/post-card-link'
 
 export default async function Page({
   searchParams: { searchInput },
@@ -25,12 +25,12 @@ export default async function Page({
       <section>
         <h1 className="sr-only">Posts</h1>
         <React.Suspense
-          fallback={Array.from({ length: 10 }).map((_, i) => (
+          fallback={Array.from({ length: 7 }).map((_, i) => (
             <PostCardSkeleton key={i} />
           ))}
         >
           {posts?.map((post) => {
-            return <PostCard key={`post-${post._id}`} post={post} />
+            return <PostCardLink key={`post-${post._id}`} post={post} />
           })}
         </React.Suspense>
       </section>
