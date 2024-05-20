@@ -1,11 +1,11 @@
 import { Shell } from '@/components/shell'
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card'
 import { getMe } from '@/lib/actions/user'
 import Link from 'next/link'
