@@ -56,7 +56,7 @@ export function AuthDropdown({ user, className, ...props }: AuthDropdownProps) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link href="/dashboard/profile">
+                <Link href="/profile">
                   <Icons.avatar className="mr-2 size-4" aria-hidden="true" />
                   Profile
                 </Link>
