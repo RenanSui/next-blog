@@ -63,7 +63,9 @@ export const getUser = async (id: string) => {
   }
 }
 
-export const updateProfile = async (formData: UpdateUserSchema) => {
+export const updateProfile = async (
+  formData: Omit<UpdateUserSchema, 'username'>,
+) => {
   const cookieStore = cookies()
   const accessToken = cookieStore.get('accessToken')?.value ?? ''
 
@@ -76,6 +78,33 @@ export const updateProfile = async (formData: UpdateUserSchema) => {
     },
     body: JSON.stringify({ ...formData }),
   })
+
+  const { status, message }: HTTPResponse<User, UserStatusCode> =
+    await response.json()
+
+  revalidatePath('/')
+
+  return { message, status }
+}
+
+export const updateUsername = async ({
+  username,
+}: Pick<UpdateUserSchema, 'username'>) => {
+  const cookieStore = cookies()
+  const accessToken = cookieStore.get('accessToken')?.value ?? ''
+
+  const response = await fetch(
+    `${process.env.SERVER_URL}/user/update/username`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ username }),
+    },
+  )
 
   const { status, message }: HTTPResponse<User, UserStatusCode> =
     await response.json()
