@@ -22,7 +22,7 @@ export async function PostCardLink({ post }: PostCardLinkProps) {
   return (
     <PostCard
       key={`post-${post._id}`}
-      className="relative flex gap-4 px-6 py-4"
+      className="relative flex gap-2 px-6 py-4"
     >
       <Link className="absolute inset-0" href={`/post/${post._id}`} />
       <Link href={`/profile/${user.username}`}>
