@@ -50,6 +50,29 @@ export async function getPostById(id: string) {
   }
 }
 
+export async function getPostByUserId(userId: string) {
+  try {
+    const response = await fetch(`${process.env.SERVER_URL}/post/user`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId }),
+    })
+    const { data, status }: HTTPResponse<Post[], PostStatusCode> =
+      await response.json()
+
+    if (status && status !== 200) {
+      throw new Error('No post were found')
+    }
+
+    return { posts: data, error: null }
+  } catch (err) {
+    const error = err as Error
+    return { posts: null, error }
+  }
+}
+
 export async function getPostBySearch(searchInput: string) {
   try {
     const response = await fetch(`${process.env.SERVER_URL}/post/search`, {
