@@ -21,7 +21,7 @@ export async function PostCardShell({ post }: PostCardShellProps) {
 
   return (
     <PostCard key={`post-${post._id}`} className="relative space-y-2 px-6 py-4">
-      <PostCardHeader className="flex gap-4">
+      <PostCardHeader className="flex gap-2">
         <Link href={`/profile/${user.username}`}>
           <Avatar className={cn('size-11')}>
             <AvatarImage src={user.imageUrl} alt={user.username} />
