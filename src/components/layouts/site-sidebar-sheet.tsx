@@ -1,6 +1,5 @@
 'use client'
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import {
   Sheet,
@@ -14,7 +13,6 @@ import { cn } from '@/lib/utils'
 import { User } from '@/types'
 import Link from 'next/link'
 import { Icons } from '../icons'
-import { UserAvatar } from '../user-avatar'
 
 export type SiteSidebarSheetProps = ButtonProps & {
   user: User | null
@@ -23,13 +21,10 @@ export type SiteSidebarSheetProps = ButtonProps & {
 export function SiteSidebarSheet({
   children,
   className,
-  user,
   ...props
 }: SiteSidebarSheetProps) {
   const { open, setOpen } = useSidebar()
   const isDesktop = useMediaQuery('(min-width: 1024px)')
-  const initials = `${user?.email.charAt(0)}`
-  // const email = `${user?.email}`
 
   if (isDesktop) return null
 
@@ -40,16 +35,12 @@ export function SiteSidebarSheet({
           variant="ghost"
           size="icon"
           className={cn(
-            'size-5 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0',
+            'size-5 hover:bg-muted focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0',
             className,
           )}
           {...props}
         >
-          {user ? (
-            <UserAvatar user={user} />
-          ) : (
-            <Icons.menu aria-hidden="true" className="size-8" />
-          )}
+          <Icons.menu aria-hidden="true" className="size-8" />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
@@ -60,17 +51,9 @@ export function SiteSidebarSheet({
         <SheetClose asChild>
           <Link
             href="/"
-            className="mx-6 flex items-center self-start font-heading tracking-wider text-foreground/90 transition-colors hover:text-foreground"
+            className="mx-6 flex items-center self-start font-heading tracking-wider text-foreground/90 transition-colors hover:text-foreground hover:bg-muted rounded-full"
           >
-            {user ? (
-              <Avatar className="size-8">
-                <AvatarFallback className="capitalize">
-                  {initials}
-                </AvatarFallback>
-              </Avatar>
-            ) : (
-              <Icons.menu aria-hidden="true" className="size-8" />
-            )}
+            <Icons.menu aria-hidden="true" className="size-6" />
           </Link>
         </SheetClose>
         {children}
