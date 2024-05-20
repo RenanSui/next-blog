@@ -1,5 +1,6 @@
 import { Search } from '@/components/layouts/search'
 import { SiteHeader } from '@/components/layouts/site-header'
+import { SiteNav } from '@/components/layouts/site-nav'
 import SiteSidebar from '@/components/layouts/site-sidebar'
 import { SiteSidebarSheet } from '@/components/layouts/site-sidebar-sheet'
 import { SidebarProvider } from '@/hooks/use-sidebar'
@@ -29,6 +30,7 @@ export default async function LobbyLayout({ children }: LobbyLayoutProps) {
               </SiteSidebarSheet>
             </SiteHeader>
             <main className="flex-1 overflow-hidden">{children}</main>
+            <SiteNav />
           </div>
           <aside
             className={cn(
