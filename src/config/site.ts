@@ -13,6 +13,12 @@ const navbar: Navbar = {
       disabled: false,
     },
     {
+      title: 'Search',
+      href: '/post/search',
+      icon: 'search',
+      disabled: false,
+    },
+    {
       title: 'Profile',
       href: '/dashboard/profile',
       icon: 'avatar',
