@@ -5,6 +5,7 @@ export const HTPPUserErrorMessages = {
   400: 'The server could not understand the request due to invalid syntax.',
   401: 'the user must authenticate to use the services.',
   403: 'The user does not have access rights to the content.',
+  409: 'Username already taken.',
 }
 
 export type UserStatusCode = keyof typeof HTPPUserErrorMessages
