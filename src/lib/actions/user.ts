@@ -63,6 +63,37 @@ export const getUser = async (id: string) => {
   }
 }
 
+export const getUserByUsername = async (username: string) => {
+  try {
+    const cookieStore = cookies()
+
+    const accessToken = cookieStore.get('accessToken')?.value ?? ''
+    const response = await fetch(`${process.env.SERVER_URL}/user/username`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ username }),
+    })
+
+    const {
+      data: user,
+      status,
+      message,
+    }: HTTPResponse<User, UserStatusCode> = await response.json()
+
+    console.log({ status, message })
+
+    return user
+  } catch (error) {
+    console.log({ error })
+    const user = null
+    return user
+  }
+}
+
 export const updateProfile = async (
   formData: Omit<UpdateUserSchema, 'username'>,
 ) => {
