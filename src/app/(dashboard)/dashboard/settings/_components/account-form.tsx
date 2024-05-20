@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { updateProfile } from '@/lib/actions/user'
+import { updateProfile, updateUsername } from '@/lib/actions/user'
 import { UserErrorHandler } from '@/lib/handle-user-error'
 import { cn } from '@/lib/utils'
 import { UpdateUserSchema, updateUserSchema } from '@/lib/validations/user'
@@ -26,8 +26,6 @@ type AccountFormProps = {
 }
 
 export const AccountForm = ({ user }: AccountFormProps) => {
-  const initials = `${user?.email.charAt(0)}`
-
   const form = useForm<z.z.infer<typeof updateUserSchema>>({
     resolver: zodResolver(updateUserSchema),
     defaultValues: {
@@ -37,14 +35,29 @@ export const AccountForm = ({ user }: AccountFormProps) => {
     },
   })
 
+  if (!user) return null
+
   const onSubmit = async (formData: UpdateUserSchema) => {
+    const { username, ...formDataProps } = formData
+
     try {
-      const { status } = await updateProfile(formData)
+      const { status } = await updateProfile(formDataProps)
       UserErrorHandler(status)
     } catch (err) {
       toast.error(err as string)
     }
+
+    if (user.username !== username) {
+      try {
+        const { status } = await updateUsername({ username })
+        UserErrorHandler(status)
+      } catch (err) {
+        toast.error(err as string)
+      }
+    }
   }
+
+  const initials = `${user?.email.charAt(0)}`
 
   return (
     <Form {...form}>
