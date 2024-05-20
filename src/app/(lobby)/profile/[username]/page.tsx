@@ -56,7 +56,6 @@ export default async function Page({
           </React.Suspense>
         </ProfileContent>
       </Profile>
-      <pre>{JSON.stringify(posts, null, 2)}</pre>
     </Shell>
   )
 }
