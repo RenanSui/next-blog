@@ -20,9 +20,9 @@ const navbar: Navbar = {
     },
     {
       title: 'Profile',
-      href: '/dashboard/profile',
+      href: '/profile',
       icon: 'avatar',
-      disabled: true,
+      disabled: false,
     },
     {
       title: 'Settings',
