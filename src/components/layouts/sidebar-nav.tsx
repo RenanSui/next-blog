@@ -5,12 +5,15 @@ import type { SidebarNavItem } from '@/types'
 import { ChevronLeftIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 import { Icons } from '../icons'
+import { useSidebar } from '@/hooks/use-sidebar'
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLDivElement> {
   items: SidebarNavItem[]
 }
 
 export const SidebarNav = ({ className, items, ...props }: SidebarNavProps) => {
+  const { open, setOpen } = useSidebar()
+
   if (!items?.length) return null
 
   return (
@@ -24,6 +27,9 @@ export const SidebarNav = ({ className, items, ...props }: SidebarNavProps) => {
             key={index}
             href={item.href}
             className={cn(item.disabled && 'pointer-events-none')}
+            onClick={() => {
+              if (open) setOpen(false)
+            }}
           >
             <span
               className={cn(
