@@ -29,7 +29,7 @@ export default function SiteSidebar({
         </Link>
       </div>
       <div className="flex flex-col gap-2.5 pt-2 lg:pt-4">{children}</div>
-      <ScrollArea className="h-[calc(100vh-8.5rem)] py-2.5 px-4">
+      <ScrollArea className="h-[calc(100vh-8.5rem)] py-2.5 px-4 lg:px-0">
         <SidebarNav items={siteConfig.mainNav} className="pt-4" />
       </ScrollArea>
       <div className="px-4">
