@@ -6,6 +6,7 @@ import { cookies } from 'next/headers'
 import { z } from 'zod'
 import { PostStatusCode } from '../handle-post-error'
 import { createPostSchema } from '../validations/post'
+import { sortPostsByDate } from '../utils'
 
 export async function getPosts() {
   try {
@@ -17,14 +18,7 @@ export async function getPosts() {
       throw new Error('No post were found')
     }
 
-    const posts = data
-      ?.sort((item1, item2) => {
-        return (
-          new Date(item1.createdAt).getTime() -
-          new Date(item2.createdAt).getTime()
-        )
-      })
-      .reverse()
+    const posts = sortPostsByDate(data)
 
     return { posts, error: null }
   } catch (err) {
@@ -66,7 +60,9 @@ export async function getPostByUserId(userId: string) {
       throw new Error('No post were found')
     }
 
-    return { posts: data, error: null }
+    const posts = sortPostsByDate(data)
+
+    return { posts, error: null }
   } catch (err) {
     const error = err as Error
     return { posts: null, error }
@@ -89,7 +85,9 @@ export async function getPostBySearch(searchInput: string) {
       throw new Error('No post were found')
     }
 
-    return { posts: data, error: null }
+    const posts = sortPostsByDate(data)
+
+    return { posts, error: null }
   } catch (err) {
     const error = err as Error
     return { posts: null, error }
