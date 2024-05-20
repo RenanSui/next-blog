@@ -20,10 +20,10 @@ export default function SiteSidebar({
 }: SiteSidebarProps) {
   return (
     <aside className={cn('h-screen w-full', className)} {...props}>
-      <div className="hidden h-[3.55rem] items-center border-border/60 lg:flex">
+      <div className="hidden h-[3.55rem] items-center lg:flex">
         <Link
           href="/"
-          className="flex w-fit items-center font-heading tracking-wider hover:bg-red-500 transition-colors px-2 py-2 rounded-full"
+          className="flex w-fit items-center font-heading tracking-wider hover:bg-border/60 transition-colors px-2 py-2 rounded-full"
         >
           <Icons.menu aria-hidden="true" className="size-9" />
         </Link>
@@ -32,9 +32,7 @@ export default function SiteSidebar({
       <ScrollArea className="h-[calc(100vh-8.5rem)] py-2.5 px-4 lg:px-0">
         <SidebarNav items={siteConfig.mainNav} className="pt-4" />
       </ScrollArea>
-      <div className="px-4">
-        <AuthDropdown user={user} />
-      </div>
+      <AuthDropdown user={user} />
     </aside>
   )
 }
