@@ -1,9 +1,9 @@
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from '@/components/ui/card'
 import { getMe } from '@/lib/actions/user'
 import { AccountForm } from './_components/account-form'
